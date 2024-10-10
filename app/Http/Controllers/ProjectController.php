@@ -27,6 +27,8 @@ class ProjectController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        $validated['user_id'] = auth()->id();
+
         Project::create($validated);
 
         return redirect()->route('projects.index');
@@ -34,7 +36,14 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        return view('projects.show', compact($project));
+        // Laravel will automatically load the tasks associated with the project
+        $tasks = $project->tasks;
+
+        /*
+        // Eager load tasks with the project
+        $project = Project::with('tasks')->findOrFail($project->id);
+        */
+        return view('projects.show', compact('project', 'tasks'));
     }
 
     public function edit(Project $project)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Project;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class TaskController extends Controller
 
     public function create()
     {
-        return view('tasks.create');
+        $projects = Project::where('user_id', auth()->id())->get();
+        return view('tasks.create', compact('projects'));
     }
 
     public function store(Request $request)
@@ -28,6 +30,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'required|string',
+            'project_id' => 'required|exists:projects,id',
         ]);
 
         Task::create($validated);

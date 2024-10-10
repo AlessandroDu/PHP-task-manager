@@ -7,6 +7,14 @@
     <form action="{{ route('tasks.store') }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="project_id">Assign to Project</label>
+            <select name="project_id" id="project_id" class="form-control" required>
+                @foreach($projects as $project)
+                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" class="form-control" required>
         </div>

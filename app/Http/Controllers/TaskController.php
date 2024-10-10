@@ -11,7 +11,9 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::whereHas('project', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->get();
         return view('tasks.index', compact('tasks'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,7 +26,19 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'projects';
+
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('projects.index');  // Redirect to tasks.index after login
+    }
+
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/login');  // Redirect to your desired route after logout
+    }
+
 
     /**
      * Create a new controller instance.

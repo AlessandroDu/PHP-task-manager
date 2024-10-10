@@ -35,7 +35,7 @@ class TaskController extends Controller
 
         Task::create($validated);
 
-        return redirect()->route('tasks.index');
+        return redirect()->route('projects.show', ['project' => $validated['project_id']]);
     }
 
     public function show(Task $task)
@@ -64,6 +64,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index');
+        return redirect()->route('projects.index');
     }
 }

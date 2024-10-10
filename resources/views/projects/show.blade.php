@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Project: {{ $project->name }}</h1>
+    <h1>Project: {{ $project->name }} <a href="{{ route('projects.index') }}" class="btn btn-secondary">See All Projects</a></h1>
     <br>
     <h2>Tasks</h2>
 

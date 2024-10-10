@@ -4,10 +4,12 @@
 @section('content')
 <div class="container">
     <h1>Tasks</h1>
+    <a href="{{ route('projects.index') }}" class="btn btn-secondary">See All Projects</a>
     <a href="{{ route('tasks.create') }}" class="btn btn-primary">Create New Task</a>
     <table class="table">
         <thead>
             <tr>
+                <th>Project</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -17,6 +19,7 @@
         <tbody>
             @foreach ($tasks as $task)
                 <tr>
+                    <td>{{ $task->project->name}}</td>
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->description }}</td>
                     <td>{{ $task->status }}</td>
